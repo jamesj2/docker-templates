@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Container>
+<Beta>False</Beta>
+<Category>Network:DNS</Category>
+<Date>2016-03-21</Date>
+  <Name>Knot Resolver</Name>
+  <Support>https://github.com/jamesj2/docker-templates/issues</Support>
+  <Overview>The Knot DNS Resolver is a caching full resolver implementation written in C and LuaJIT, including both a resolver library and a daemon. Modular architecture of the library keeps the core tiny and efficient, and provides a state-machine like API for extensions. There are three built-in modules - iterator, cache, validator, and many external.
+
+The Lua modules, switchable and shareable cache, and fast FFI bindings makes it great to tap into resolution process, or be used for your recursive DNS service. It's the OpenResty of DNS.
+
+The server adopts a different scaling strategy than the rest of the DNS recursors - no threading, shared-nothing architecture (except MVCC cache that may be shared). You can start and stop additional nodes depending on the contention without downtime.</Overview>
+  <Changes>Initial Release</Changes>
+  <Description>The Knot DNS Resolver is a caching full resolver implementation written in C and LuaJIT, including both a resolver library and a daemon. [br]
+  [b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]
+  [b]53[/b] Standard DNS Port [br]
+  [b]/config[/b]Storing Configuration[br]
+  </Description>
+  <Project>https://github.com/CZ-NIC/knot-resolver</Project>
+  <Registry>https://hub.docker.com/r/cznic/knot-resolver/</Registry>
+  <Repository>cznic/knot-resolver</Repository>
+  <BindTime>true</BindTime>
+  <Privileged>false</Privileged>
+  <Environment>
+    <Variable>
+      <Name>PUID</Name>
+      <Value>99</Value>
+    </Variable>
+    <Variable>
+      <Name>PGID</Name>
+      <Value>100</Value>
+    </Variable>
+  </Environment>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>53</HostPort>
+        <ContainerPort>53</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/apache</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Version></Version>
+<!--  <WebUI>http://[IP]:[PORT:80]/</WebUI> -->
+  <Banner>https://raw.githubusercontent.com/jamesj2/docker-templates/master/jamesj2/img/knot-resolver-banner.png</Banner>
+  <Icon>https://raw.githubusercontent.com/jamesj2/docker-templates/master/jamesj2/img/knot-resolver-banner.jpg</Icon>
+  <ExtraParams></ExtraParams>
+</Container>
